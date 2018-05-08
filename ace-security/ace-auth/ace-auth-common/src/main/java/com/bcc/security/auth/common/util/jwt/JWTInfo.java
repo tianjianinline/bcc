@@ -6,7 +6,9 @@ import java.io.Serializable;
  * Created by ace on 2017/9/10.
  */
 public class JWTInfo implements Serializable,IJWTInfo {
-    private String username;
+
+	private static final long serialVersionUID = -726837627868001746L;
+	private String username;
     private String userId;
     private String name;
 
