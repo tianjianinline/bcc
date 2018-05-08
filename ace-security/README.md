@@ -1,7 +1,7 @@
 下载完后端代码后，记得先安装`lombok插件`，否则你的IDE会报代码缺失。
 ## 后端工程启动
 ### 环境须知
-- mysql一个，redis一个，rabbitmq一个
+- mysql一个，redis一个
 - jdk1.8
 - IDE插件一个，`lombok插件`，具体百度即可
 
