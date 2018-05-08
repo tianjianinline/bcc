@@ -1,12 +1,18 @@
 
 package com.bcc.security.auth.client.jwt;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import com.bcc.security.auth.client.config.ServiceAuthConfig;
 import com.bcc.security.auth.client.exception.JwtIllegalArgumentException;
 import com.bcc.security.auth.client.exception.JwtSignatureException;
 import com.bcc.security.auth.client.exception.JwtTokenExpiredException;
 import com.bcc.security.auth.client.feign.ServiceAuthFeign;
-import com.bcc.security.auth.common.event.AuthRemoteEvent;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.auth.common.util.jwt.JWTHelper;
 import com.bcc.security.common.msg.BaseResponse;
@@ -15,13 +21,6 @@ import com.bcc.security.common.msg.ObjectRestResponse;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
-
-import java.util.List;
 
 /**
  * Created by ace on 2017/9/15.
@@ -29,7 +28,7 @@ import java.util.List;
 @Configuration
 @Slf4j
 @EnableScheduling
-public class ServiceAuthUtil  implements ApplicationListener<AuthRemoteEvent> {
+public class ServiceAuthUtil {
     @Autowired
     private ServiceAuthConfig serviceAuthConfig;
     @Autowired
@@ -84,9 +83,5 @@ public class ServiceAuthUtil  implements ApplicationListener<AuthRemoteEvent> {
         }
         return allowedClient;
     }
-
-    @Override
-    public void onApplicationEvent(AuthRemoteEvent authRemoteEvent) {
-        this.allowedClient = authRemoteEvent.getAllowedClient();
-    }
 }
+

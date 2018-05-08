@@ -1,13 +1,7 @@
 package com.bcc.security.auth.service.impl;
 
-import com.bcc.security.auth.bean.ClientInfo;
-import com.bcc.security.auth.common.event.AuthRemoteEvent;
-import com.bcc.security.auth.entity.Client;
-import com.bcc.security.auth.mapper.ClientMapper;
-import com.bcc.security.auth.service.AuthClientService;
-import com.bcc.security.auth.util.client.ClientTokenUtil;
-import com.bcc.security.common.exception.auth.ClientInvalidException;
-import com.bcc.security.common.util.UUIDUtils;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -15,8 +9,13 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.bcc.security.auth.bean.ClientInfo;
+import com.bcc.security.auth.entity.Client;
+import com.bcc.security.auth.mapper.ClientMapper;
+import com.bcc.security.auth.service.AuthClientService;
+import com.bcc.security.auth.util.client.ClientTokenUtil;
+import com.bcc.security.common.exception.auth.ClientInvalidException;
+import com.bcc.security.common.util.UUIDUtils;
 
 /**
  * Created by ace on 2017/9/10.
@@ -100,14 +99,14 @@ public class DBAuthClientService implements AuthClientService {
             if(dbClient==null) {
                 client.setSecret(UUIDUtils.generateShortUuid());
                 clientMapper.insert(client);
-            }else{
+            }/*else{
                 // 主动推送
                 final List<String> clients = clientMapper.selectAllowedClient(dbClient.getId() + "");
                 final String myUniqueId = context.getId();
                 final AuthRemoteEvent event =
                         new AuthRemoteEvent(this, myUniqueId, name, clients);
                 context.publishEvent(event);
-            }
+            }*/
         });
     }
 }

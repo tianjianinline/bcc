@@ -1,11 +1,15 @@
 package com.bcc.security.auth.client;
 
-import org.springframework.context.annotation.Configuration;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 import org.springframework.context.annotation.Import;
 
 import com.bcc.security.auth.client.configuration.AutoConfiguration;
-
-import java.lang.annotation.*;
 
 /**
  * Created by ace on 2017/9/15.

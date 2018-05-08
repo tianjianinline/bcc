@@ -31,16 +31,7 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       maxOpenPreparedStatements: 20
-    rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
-    zipkin:
-        enabled: true
-    sleuth:
-        sampler:
-            percentage: 1
+
 mybatis:
     basepackage: com.github.wxiaoqi.security.auth.mapper
     xmlLocation: classpath:mapper/**/*.xml

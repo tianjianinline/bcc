@@ -20,7 +20,7 @@ import com.bcc.security.gate.utils.DBLog;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients({"com.github.wxiaoqi.security.auth.client.feign","com.github.wxiaoqi.security.gate.feign"})
+@EnableFeignClients({"com.bcc.security.auth.client.feign","com.bcc.security.gate.feign"})
 @EnableZuulProxy
 @EnableScheduling
 @EnableAceAuthClient
