@@ -1,5 +1,23 @@
 package com.bcc.security.gate.filter;
 
+import java.nio.charset.Charset;
+import java.util.Date;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.catalina.util.URLEncoder;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.alibaba.fastjson.JSON;
 import com.bcc.security.api.vo.authority.PermissionInfo;
 import com.bcc.security.api.vo.log.LogInfo;
@@ -20,25 +38,11 @@ import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+
 import feign.Feign;
 import feign.jackson.JacksonDecoder;
 import feign.jackson.JacksonEncoder;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.annotation.PostConstruct;
-import javax.servlet.http.HttpServletRequest;
-import java.net.URLEncoder;
-import java.util.Date;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * ${DESCRIPTION}
@@ -158,7 +162,7 @@ public class AdminAccessFilter extends ZuulFilter {
     private void setCurrentUserInfoAndLog(RequestContext ctx, IJWTInfo user, PermissionInfo pm) {
         String host = ClientUtil.getClientIp(ctx.getRequest());
         ctx.addZuulRequestHeader("userId", user.getId());
-        ctx.addZuulRequestHeader("userName", URLEncoder.encode(user.getName()));
+        ctx.addZuulRequestHeader("userName", URLEncoder.DEFAULT.encode(user.getName(),Charset.forName("UTF-8")));
         ctx.addZuulRequestHeader("userHost", ClientUtil.getClientIp(ctx.getRequest()));
         LogInfo logInfo = new LogInfo(pm.getMenu(), pm.getName(), pm.getUri(), new Date(), user.getId(), user.getName(), host);
         DBLog.getInstance().setLogService(logService).offerQueue(logInfo);

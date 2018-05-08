@@ -67,7 +67,7 @@ public class RateLimitAutoConfiguration {
         }
 
         @Bean
-        public RateLimiter redisRateLimiter(@Qualifier("rateLimiterRedisTemplate") final RedisTemplate redisTemplate) {
+        public RateLimiter redisRateLimiter(@Qualifier("rateLimiterRedisTemplate") final RedisTemplate<String,Object> redisTemplate) {
             return new RedisRateLimiter(redisTemplate);
         }
     }

@@ -16,14 +16,15 @@
 
 package com.bcc.gate.ratelimit.config.repository;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
+import org.springframework.data.redis.core.RedisTemplate;
+
 import com.bcc.gate.ratelimit.config.Rate;
 import com.bcc.gate.ratelimit.config.RateLimiter;
 import com.bcc.gate.ratelimit.config.properties.RateLimitProperties.Policy;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
  * @author Marcos Barbero

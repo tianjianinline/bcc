@@ -4,7 +4,9 @@ package com.bcc.security.common.exception;
  * Created by ace on 2017/9/8.
  */
 public class BaseException extends RuntimeException {
-    private int status = 200;
+
+	private static final long serialVersionUID = 3996663444674786179L;
+	private int status = 200;
 
     public int getStatus() {
         return status;

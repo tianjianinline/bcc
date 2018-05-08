@@ -1,12 +1,14 @@
 package com.bcc.security.common.util;
 
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.net.URLDecoder;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 
 
@@ -45,7 +47,10 @@ public class EntityUtils {
 		if(request!=null) {
 			hostIp = String.valueOf(request.getHeader("userHost"));
 			name = String.valueOf(request.getHeader("userName"));
-			name = URLDecoder.decode(name);
+			try {
+				name = URLDecoder.decode(name,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+			}
 			id = String.valueOf(request.getHeader("userId"));
 		}
 		// 默认属性
@@ -74,7 +79,10 @@ public class EntityUtils {
 		if(request!=null) {
 			hostIp = String.valueOf(request.getHeader("userHost"));
 			name = String.valueOf(request.getHeader("userName"));
-			name = URLDecoder.decode(name);
+			try {
+				name = URLDecoder.decode(name,"utf-8");
+			} catch (UnsupportedEncodingException e) {
+			}
 			id = String.valueOf(request.getHeader("userId"));
 		}
 		// 默认属性
