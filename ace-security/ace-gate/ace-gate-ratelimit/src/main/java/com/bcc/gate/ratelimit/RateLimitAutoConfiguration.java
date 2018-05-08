@@ -16,15 +16,6 @@
 
 package com.bcc.gate.ratelimit;
 
-import com.bcc.gate.ratelimit.config.IUserPrincipal;
-import com.bcc.gate.ratelimit.config.RateLimiter;
-import com.bcc.gate.ratelimit.config.properties.RateLimitProperties;
-import com.bcc.gate.ratelimit.config.repository.InMemoryRateLimiter;
-import com.bcc.gate.ratelimit.config.repository.RedisRateLimiter;
-import com.bcc.gate.ratelimit.config.repository.springdata.IRateLimiterRepository;
-import com.bcc.gate.ratelimit.config.repository.springdata.SpringDataRateLimiter;
-import com.bcc.gate.ratelimit.filters.RateLimitFilter;
-
 import static com.bcc.gate.ratelimit.config.properties.RateLimitProperties.PREFIX;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -40,6 +31,15 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+
+import com.bcc.gate.ratelimit.config.IUserPrincipal;
+import com.bcc.gate.ratelimit.config.RateLimiter;
+import com.bcc.gate.ratelimit.config.properties.RateLimitProperties;
+import com.bcc.gate.ratelimit.config.repository.InMemoryRateLimiter;
+import com.bcc.gate.ratelimit.config.repository.RedisRateLimiter;
+import com.bcc.gate.ratelimit.config.repository.springdata.IRateLimiterRepository;
+import com.bcc.gate.ratelimit.config.repository.springdata.SpringDataRateLimiter;
+import com.bcc.gate.ratelimit.filters.RateLimitFilter;
 
 /**
  * @author Marcos Barbero
@@ -57,7 +57,6 @@ public class RateLimitAutoConfiguration {
     }
 
     @ConditionalOnClass(RedisTemplate.class)
-    @ConditionalOnMissingBean(RateLimiter.class)
     @ConditionalOnProperty(prefix = PREFIX, name = "repository", havingValue = "REDIS")
     public static class RedisConfiguration {
 
@@ -67,23 +66,11 @@ public class RateLimitAutoConfiguration {
         }
 
         @Bean
-        public RateLimiter redisRateLimiter(@Qualifier("rateLimiterRedisTemplate") final RedisTemplate<String,Object> redisTemplate) {
+        public RateLimiter redisRateLimiter(@Qualifier("rateLimiterRedisTemplate") final RedisTemplate redisTemplate) {
             return new RedisRateLimiter(redisTemplate);
         }
     }
 
-    @EntityScan
-    @EnableJpaRepositories
-    @ConditionalOnMissingBean(RateLimiter.class)
-    @ConditionalOnProperty(prefix = PREFIX, name = "repository", havingValue = "JPA")
-    public static class SpringDataConfiguration {
-
-        @Bean
-        public RateLimiter springDataRateLimiter(IRateLimiterRepository rateLimiterRepository) {
-            return new SpringDataRateLimiter(rateLimiterRepository);
-        }
-
-    }
 
     @ConditionalOnMissingBean(RateLimiter.class)
     @ConditionalOnProperty(prefix = PREFIX, name = "repository", havingValue = "IN_MEMORY", matchIfMissing = true)
