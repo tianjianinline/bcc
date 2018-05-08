@@ -1,25 +1,22 @@
 package com.bcc.security.auth.client.interceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import com.bcc.security.auth.client.annotation.IgnoreUserToken;
 import com.bcc.security.auth.client.config.UserAuthConfig;
 import com.bcc.security.auth.client.jwt.UserAuthUtil;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.common.context.BaseContextHandler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 /**
  * Created by ace on 2017/9/10.
  */
 public class UserAuthRestInterceptor extends HandlerInterceptorAdapter {
-    private Logger logger = LoggerFactory.getLogger(UserAuthRestInterceptor.class);
 
     @Autowired
     private UserAuthUtil userAuthUtil;

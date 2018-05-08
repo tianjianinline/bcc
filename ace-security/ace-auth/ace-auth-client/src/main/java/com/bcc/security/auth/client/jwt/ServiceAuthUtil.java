@@ -15,7 +15,6 @@ import com.bcc.security.auth.client.exception.JwtTokenExpiredException;
 import com.bcc.security.auth.client.feign.ServiceAuthFeign;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.auth.common.util.jwt.JWTHelper;
-import com.bcc.security.common.msg.BaseResponse;
 import com.bcc.security.common.msg.ObjectRestResponse;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -51,10 +50,9 @@ public class ServiceAuthUtil {
 
     public void refreshAllowedClient() {
         log.info("refresh allowedClient.....");
-        BaseResponse resp = serviceAuthFeign.getAllowedClient(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
+        ObjectRestResponse<List<String>> resp = serviceAuthFeign.getAllowedClient(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
         if (resp.getStatus() == 200) {
-            ObjectRestResponse<List<String>> allowedClient = (ObjectRestResponse<List<String>>) resp;
-            this.allowedClient = allowedClient.getData();
+            this.allowedClient = resp.getData();
         }
     }
 
@@ -62,10 +60,9 @@ public class ServiceAuthUtil {
     @Scheduled(cron = "0 0/30 * * * ?")
     public void refreshClientToken() {
         log.info("refresh client token.....");
-        BaseResponse resp = serviceAuthFeign.getAccessToken(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
+        ObjectRestResponse<String> resp = serviceAuthFeign.getAccessToken(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
         if (resp.getStatus() == 200) {
-            ObjectRestResponse<String> clientToken = (ObjectRestResponse<String>) resp;
-            this.clientToken = clientToken.getData();
+            this.clientToken = resp.getData();
         }
     }
 

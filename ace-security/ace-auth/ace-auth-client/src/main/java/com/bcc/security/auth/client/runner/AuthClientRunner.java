@@ -1,15 +1,15 @@
 package com.bcc.security.auth.client.runner;
 
-import com.bcc.security.auth.client.config.ServiceAuthConfig;
-import com.bcc.security.auth.client.config.UserAuthConfig;
-import com.bcc.security.auth.client.feign.ServiceAuthFeign;
-import com.bcc.security.common.msg.BaseResponse;
-import com.bcc.security.common.msg.ObjectRestResponse;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+
+import com.bcc.security.auth.client.config.ServiceAuthConfig;
+import com.bcc.security.auth.client.config.UserAuthConfig;
+import com.bcc.security.auth.client.feign.ServiceAuthFeign;
+import com.bcc.security.common.msg.ObjectRestResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 监听完成时触发
@@ -31,16 +31,14 @@ public class AuthClientRunner implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         log.info("初始化加载用户pubKey");
-        BaseResponse resp = serviceAuthFeign.getUserPublicKey(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
+        ObjectRestResponse<byte[]> resp = serviceAuthFeign.getUserPublicKey(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
         if (resp.getStatus() == 200) {
-            ObjectRestResponse<byte[]> userResponse = (ObjectRestResponse<byte[]>) resp;
-            this.userAuthConfig.setPubKeyByte(userResponse.getData());
+            this.userAuthConfig.setPubKeyByte(resp.getData());
         }
         log.info("初始化加载客户pubKey");
         resp = serviceAuthFeign.getServicePublicKey(serviceAuthConfig.getClientId(), serviceAuthConfig.getClientSecret());
         if (resp.getStatus() == 200) {
-            ObjectRestResponse<byte[]> userResponse = (ObjectRestResponse<byte[]>) resp;
-            this.serviceAuthConfig.setPubKeyByte(userResponse.getData());
+            this.serviceAuthConfig.setPubKeyByte(resp.getData());
         }
     }
 }

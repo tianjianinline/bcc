@@ -1,35 +1,28 @@
 package com.bcc.security.auth.client.interceptor;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.method.HandlerMethod;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
 import com.bcc.security.auth.client.annotation.IgnoreClientToken;
 import com.bcc.security.auth.client.config.ServiceAuthConfig;
 import com.bcc.security.auth.client.jwt.ServiceAuthUtil;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.common.exception.auth.ClientForbiddenException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.List;
-
 /**
  * Created by ace on 2017/9/12.
  */
-@SuppressWarnings("ALL")
-public class ServiceAuthRestInterceptor extends HandlerInterceptorAdapter {
-    private Logger logger = LoggerFactory.getLogger(ServiceAuthRestInterceptor.class);
 
+public class ServiceAuthRestInterceptor extends HandlerInterceptorAdapter {
     @Autowired
     private ServiceAuthUtil serviceAuthUtil;
 
     @Autowired
     private ServiceAuthConfig serviceAuthConfig;
-
-    private List<String> allowedClient;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
