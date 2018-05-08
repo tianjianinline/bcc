@@ -1,19 +1,17 @@
 package com.bcc.security.auth.interceptor;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.bcc.security.auth.configuration.ClientConfiguration;
 import com.bcc.security.auth.service.AuthClientService;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Created by ace on 2017/9/12.
  */
 public class ClientTokenInterceptor implements RequestInterceptor {
-    private Logger logger = LoggerFactory.getLogger(ClientTokenInterceptor.class);
     @Autowired
     private ClientConfiguration clientConfiguration;
     @Autowired

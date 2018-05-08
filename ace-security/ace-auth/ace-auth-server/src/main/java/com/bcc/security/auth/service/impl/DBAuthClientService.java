@@ -28,6 +28,7 @@ public class DBAuthClientService implements AuthClientService {
     private ClientTokenUtil clientTokenUtil;
     @Autowired
     private DiscoveryClient discovery;
+    
     private ApplicationContext context;
 
     @Autowired

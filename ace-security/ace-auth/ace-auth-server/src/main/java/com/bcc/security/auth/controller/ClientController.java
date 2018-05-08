@@ -24,12 +24,12 @@ public class ClientController{
     private KeyConfiguration keyConfiguration;
 
     @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public ObjectRestResponse getAccessToken(String clientId, String secret) throws Exception {
+    public ObjectRestResponse<String> getAccessToken(String clientId, String secret) throws Exception {
         return new ObjectRestResponse<String>().data(authClientService.apply(clientId, secret));
     }
 
     @RequestMapping(value = "/myClient")
-    public ObjectRestResponse getAllowedClient(String serviceId, String secret) {
+    public ObjectRestResponse<List<String>> getAllowedClient(String serviceId, String secret) {
         return new ObjectRestResponse<List<String>>().data(authClientService.getAllowedClient(serviceId, secret));
     }
 
