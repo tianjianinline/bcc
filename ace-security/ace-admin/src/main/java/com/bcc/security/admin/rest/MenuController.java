@@ -73,8 +73,6 @@ public class MenuController extends BaseController<MenuBiz, Menu> {
         } catch (Exception e) {
             return new ArrayList<MenuTree>();
         }
-        List<MenuTree> trees = new ArrayList<MenuTree>();
-        MenuTree node = null;
         Example example = new Example(Menu.class);
         Menu parent = baseBiz.selectById(parentId);
         example.createCriteria().andLike("path", parent.getPath() + "%").andNotEqualTo("id",parent.getId());

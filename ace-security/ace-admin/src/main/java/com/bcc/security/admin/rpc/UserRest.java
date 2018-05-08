@@ -1,14 +1,18 @@
 package com.bcc.security.admin.rpc;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.ace.cache.annotation.Cache;
 import com.bcc.security.admin.rpc.service.PermissionService;
 import com.bcc.security.api.vo.authority.PermissionInfo;
 import com.bcc.security.api.vo.user.UserInfo;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * ${DESCRIPTION}

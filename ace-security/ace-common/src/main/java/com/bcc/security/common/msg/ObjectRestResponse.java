@@ -17,13 +17,13 @@ public class ObjectRestResponse<T> extends BaseResponse {
     }
 
 
-    public ObjectRestResponse rel(boolean rel) {
+    public ObjectRestResponse<T> rel(boolean rel) {
         this.setRel(rel);
         return this;
     }
 
 
-    public ObjectRestResponse data(T data) {
+    public ObjectRestResponse<T> data(T data) {
         this.setData(data);
         return this;
     }

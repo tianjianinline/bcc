@@ -1,12 +1,15 @@
 package com.bcc.security.admin.vo;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.BeanUtils;
 
 import com.bcc.security.common.vo.TreeNode;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * ${DESCRIPTION}
@@ -14,41 +17,21 @@ import java.util.List;
  * @author wanghaobin
  * @create 2017-06-19 13:03
  */
+@Data
+@EqualsAndHashCode(callSuper=false)
 public class AuthorityMenuTree extends TreeNode implements Serializable{
-    String text;
-    List<AuthorityMenuTree> nodes = new ArrayList<AuthorityMenuTree>();
-    String icon;
 
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
+	private static final long serialVersionUID = 4419462012771944308L;
+	private String text;
+    private String icon;
+    private List<AuthorityMenuTree> nodes = new ArrayList<AuthorityMenuTree>();
+    
     public AuthorityMenuTree(String text, List<AuthorityMenuTree> nodes) {
         this.text = text;
         this.nodes = nodes;
     }
 
     public AuthorityMenuTree() {
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public List<AuthorityMenuTree> getNodes() {
-        return nodes;
-    }
-
-    public void setNodes(List<AuthorityMenuTree> nodes) {
-        this.nodes = nodes;
     }
 
     @Override

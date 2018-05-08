@@ -1,9 +1,10 @@
 package com.bcc.security.admin.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Table(name = "gate_log")
 public class GateLog {
