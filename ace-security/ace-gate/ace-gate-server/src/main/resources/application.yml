@@ -12,7 +12,7 @@ spring:
     database: 1
     host: 192.168.20.208
     pool:
-      max-active: 20
+      max-active: 100
 server:
   port: 8765 #启动端口
 zuul:
@@ -52,7 +52,7 @@ ribbon:
 hystrix:
   threadpool:
     default:
-      coreSize: 1000 ##并发执行的最大线程数，默认10
+      coreSize: 20 ##并发执行的最大线程数，默认10
       maxQueueSize: 1000 ##BlockingQueue的最大队列数
       queueSizeRejectionThreshold: 500 ##即使maxQueueSize没有达到，达到queueSizeRejectionThreshold该值后，请求也会被拒绝
   command:
