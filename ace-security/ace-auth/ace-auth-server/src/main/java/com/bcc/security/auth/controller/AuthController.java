@@ -1,15 +1,25 @@
 package com.bcc.security.auth.controller;
 
-import com.bcc.security.auth.service.AuthService;
-import com.bcc.security.auth.util.user.JwtAuthenticationRequest;
-import com.bcc.security.auth.util.user.JwtAuthenticationResponse;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
+import com.bcc.security.auth.common.util.jwt.JWTInfo;
+import com.bcc.security.auth.service.AuthService;
+import com.bcc.security.auth.util.user.JwtAuthenticationRequest;
+import com.bcc.security.auth.util.user.JwtAuthenticationResponse;
+
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
 
 @RestController
 @RequestMapping("jwt")
@@ -40,14 +50,18 @@ public class AuthController {
     }
 
     @RequestMapping(value = "verify", method = RequestMethod.GET)
-    public ResponseEntity<?> verify(String token) throws Exception {
-        authService.validate(token);
-        return ResponseEntity.ok(true);
+    public ResponseEntity<Boolean> isValid(String token) {
+        return ResponseEntity.ok(authService.isValid(token));
     }
 
     @RequestMapping(value = "invalid", method = RequestMethod.POST)
     public ResponseEntity<?> invalid(@RequestHeader("access-token") String token){
         authService.invalid(token);
         return ResponseEntity.ok(true);
+    }
+    
+    @RequestMapping(value = "info", method = RequestMethod.GET)
+    public ResponseEntity<JWTInfo> getInfoFromToken(@RequestParam("token") String token) throws ExpiredJwtException,SignatureException{
+    	return ResponseEntity.ok(authService.getInfoFromToken(token));
     }
 }

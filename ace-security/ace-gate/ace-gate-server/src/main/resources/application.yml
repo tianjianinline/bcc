@@ -7,7 +7,7 @@ spring:
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: GMT+8
-        default-property-inclusion: non_null
+        default-property-inclusion: NON_NULL
     redis:
         database: 1
         host: 192.168.20.208
@@ -84,7 +84,3 @@ auth:
   serviceId: ace-auth
   user:
     token-header: Authorization
-  client:
-    token-header: client-token
-    id: ace-gate  #不填则默认读取spring.application.name
-    secret: 123456

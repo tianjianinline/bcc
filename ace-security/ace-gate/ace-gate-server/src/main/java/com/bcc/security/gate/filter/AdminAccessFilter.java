@@ -21,10 +21,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.alibaba.fastjson.JSON;
 import com.bcc.security.api.vo.authority.PermissionInfo;
 import com.bcc.security.api.vo.log.LogInfo;
-import com.bcc.security.auth.client.config.ServiceAuthConfig;
 import com.bcc.security.auth.client.config.UserAuthConfig;
 import com.bcc.security.auth.client.interceptor.ServiceFeignInterceptor;
-import com.bcc.security.auth.client.jwt.ServiceAuthUtil;
 import com.bcc.security.auth.client.jwt.UserAuthUtil;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.common.context.BaseContextHandler;
@@ -67,13 +65,7 @@ public class AdminAccessFilter extends ZuulFilter {
     private UserAuthUtil userAuthUtil;
 
     @Autowired
-    private ServiceAuthConfig serviceAuthConfig;
-
-    @Autowired
     private UserAuthConfig userAuthConfig;
-
-    @Autowired
-    private ServiceAuthUtil serviceAuthUtil;
 
     @Autowired
     private EurekaClient discoveryClient;
@@ -82,8 +74,6 @@ public class AdminAccessFilter extends ZuulFilter {
     public void init() {
         InstanceInfo prodSvcInfo = discoveryClient.getNextServerFromEureka("ACE-ADMIN", false);
         ServiceFeignInterceptor serviceFeignInterceptor = new ServiceFeignInterceptor();
-        serviceFeignInterceptor.setServiceAuthConfig(serviceAuthConfig);
-        serviceFeignInterceptor.setServiceAuthUtil(serviceAuthUtil);
         serviceFeignInterceptor.setUserAuthConfig(userAuthConfig);
         this.userService = Feign.builder().encoder(new JacksonEncoder())
                 .decoder(new JacksonDecoder())
@@ -132,8 +122,6 @@ public class AdminAccessFilter extends ZuulFilter {
         if (permissions.length > 0) {
             checkUserPermission(permissions, ctx, user);
         }
-        // 申请客户端密钥头
-        ctx.addZuulRequestHeader(serviceAuthConfig.getTokenHeader(), serviceAuthUtil.getClientToken());
         BaseContextHandler.remove();
         return null;
     }

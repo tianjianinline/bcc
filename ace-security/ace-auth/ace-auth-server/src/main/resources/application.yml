@@ -4,7 +4,7 @@ spring:
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: GMT+8
-        default-property-inclusion: non_null
+        default-property-inclusion: NON_NULL
     redis:
         database: 1
         host: 192.168.20.208
@@ -63,28 +63,15 @@ hystrix:
             timeoutInMilliseconds: 5000
 
 eureka:
-    instance:
-        statusPageUrlPath: /info
-        healthCheckUrlPath: /health
-        # docker 部署开启
-#        prefer-ip-address: true
-#        ip-address: 127.0.0.1
-    client:
-        serviceUrl:
-#            defaultZone: http://localhost:8761/eureka/
-                    # docker 部署开启
-            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
-
-
+  instance:
+    statusPageUrlPath: /info
+    healthCheckUrlPath: /health
+    prefer-ip-address: true
+  client:
+    serviceUrl: 
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
 
 jwt:
   token-header: Authorization
   expire: 3600
-  rsa-secret: xx1WET12^%3^(WE45
-
-client:
-  id: ace-auth
-  secret: 123456
-  token-header: client-token
-  expire: 7200
-  rsa-secret: x2318^^(*WRYQWR(QW&T
+  rsa-secret: xx1WET12^%3^(WE45  # 根据这个密码生成一对非对称RSA秘钥，并缓存在Redis，用来用户Token生成（私钥）、数字签名验证（公钥）

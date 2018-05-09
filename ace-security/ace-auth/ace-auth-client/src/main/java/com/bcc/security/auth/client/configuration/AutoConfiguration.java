@@ -4,7 +4,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import com.bcc.security.auth.client.config.ServiceAuthConfig;
 import com.bcc.security.auth.client.config.UserAuthConfig;
 
 /**
@@ -13,10 +12,6 @@ import com.bcc.security.auth.client.config.UserAuthConfig;
 @Configuration
 @ComponentScan({"com.bcc.security.auth.client"})
 public class AutoConfiguration {
-    @Bean
-    ServiceAuthConfig getServiceAuthConfig(){
-        return new ServiceAuthConfig();
-    }
 
     @Bean
     UserAuthConfig getUserAuthConfig(){

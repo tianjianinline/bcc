@@ -13,10 +13,6 @@ import org.springframework.context.annotation.Configuration;
 public class KeyConfiguration {
     @Value("${jwt.rsa-secret}")
     private String userSecret;
-    @Value("${client.rsa-secret}")
-    private String serviceSecret;
     private byte[] userPubKey;
     private byte[] userPriKey;
-    private byte[] servicePriKey;
-    private byte[] servicePubKey;
 }

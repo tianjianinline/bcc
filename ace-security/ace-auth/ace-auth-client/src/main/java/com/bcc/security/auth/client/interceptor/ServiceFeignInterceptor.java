@@ -2,9 +2,7 @@ package com.bcc.security.auth.client.interceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.bcc.security.auth.client.config.ServiceAuthConfig;
 import com.bcc.security.auth.client.config.UserAuthConfig;
-import com.bcc.security.auth.client.jwt.ServiceAuthUtil;
 import com.bcc.security.common.context.BaseContextHandler;
 
 import feign.RequestInterceptor;
@@ -16,33 +14,19 @@ import feign.RequestTemplate;
  * @date 2017/9/15
  */
 public class ServiceFeignInterceptor implements RequestInterceptor {
-	
-    @Autowired
-    private ServiceAuthConfig serviceAuthConfig;
+
     @Autowired
     private UserAuthConfig userAuthConfig;
-    @Autowired
-    private ServiceAuthUtil serviceAuthUtil;
 
-    public ServiceFeignInterceptor() {
-    }
-
-
+    public ServiceFeignInterceptor() {}
+    
     @Override
     public void apply(RequestTemplate requestTemplate) {
-        requestTemplate.header(serviceAuthConfig.getTokenHeader(), serviceAuthUtil.getClientToken());
         requestTemplate.header(userAuthConfig.getTokenHeader(), BaseContextHandler.getToken());
     }
 
-    public void setServiceAuthConfig(ServiceAuthConfig serviceAuthConfig) {
-        this.serviceAuthConfig = serviceAuthConfig;
-    }
 
     public void setUserAuthConfig(UserAuthConfig userAuthConfig) {
         this.userAuthConfig = userAuthConfig;
-    }
-
-    public void setServiceAuthUtil(ServiceAuthUtil serviceAuthUtil) {
-        this.serviceAuthUtil = serviceAuthUtil;
     }
 }

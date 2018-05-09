@@ -1,8 +1,7 @@
 package com.bcc.security.auth.configuration;
 
-import com.bcc.security.auth.interceptor.ServiceAuthRestInterceptor;
-import com.bcc.security.auth.interceptor.UserAuthRestInterceptor;
-import com.bcc.security.common.handler.GlobalExceptionHandler;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,8 +9,8 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import com.bcc.security.auth.interceptor.UserAuthRestInterceptor;
+import com.bcc.security.common.handler.GlobalExceptionHandler;
 
 /**
  * Created by ace on 2017/9/8.
@@ -27,15 +26,10 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         ArrayList<String> commonPathPatterns = getExcludeCommonPathPatterns();
-        registry.addInterceptor(getServiceAuthRestInterceptor()).addPathPatterns("/**").excludePathPatterns(commonPathPatterns.toArray(new String[]{}));
         registry.addInterceptor(getUserAuthRestInterceptor()).addPathPatterns("/**").excludePathPatterns(commonPathPatterns.toArray(new String[]{}));
         super.addInterceptors(registry);
     }
 
-    @Bean
-    ServiceAuthRestInterceptor getServiceAuthRestInterceptor() {
-        return new ServiceAuthRestInterceptor();
-    }
 
     @Bean
     UserAuthRestInterceptor getUserAuthRestInterceptor() {

@@ -2,9 +2,16 @@ package com.bcc.security.auth.common.util.jwt;
 
 import java.io.Serializable;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 /**
  * Created by ace on 2017/9/10.
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class JWTInfo implements Serializable,IJWTInfo {
 
 	private static final long serialVersionUID = -726837627868001746L;
@@ -12,37 +19,14 @@ public class JWTInfo implements Serializable,IJWTInfo {
     private String userId;
     private String name;
 
-    public JWTInfo(String username, String userId, String name) {
-        this.username = username;
-        this.userId = userId;
-        this.name = name;
-    }
-
     @Override
     public String getUniqueName() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public String getId() {
         return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

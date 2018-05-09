@@ -21,7 +21,7 @@ import com.bcc.security.gate.utils.DBLog;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients({"com.bcc.security.auth.client.feign","com.bcc.security.gate.feign"})
+@EnableFeignClients({"com.bcc.security.gate.feign","com.bcc.security.auth.client.feign"})
 @EnableZuulProxy
 @EnableScheduling
 @EnableAceAuthClient
