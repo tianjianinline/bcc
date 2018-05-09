@@ -45,11 +45,6 @@ eureka:
     serviceUrl:
       defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
 
-swagger:
-    basepackage: com.bcc.security.admin
-    service:
-        name: BCC
-        description: BCC 后端服务
 auth:
   serviceId: ace-auth
   user:
@@ -58,8 +53,8 @@ auth:
 #redis-cache 相关
 redis: 
   pool:
-    maxActive: 300
-    maxIdle: 100
+    maxActive: 100
+    maxIdle: 20
     maxWait: 1000
   host: 192.168.20.208
   port: 6379

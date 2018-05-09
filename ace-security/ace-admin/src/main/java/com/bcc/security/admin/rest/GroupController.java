@@ -20,8 +20,6 @@ import com.bcc.security.admin.vo.GroupUsers;
 import com.bcc.security.common.msg.ObjectRestResponse;
 import com.bcc.security.common.rest.BaseController;
 import com.bcc.security.common.util.TreeUtil;
-
-import io.swagger.annotations.Api;
 import tk.mybatis.mapper.entity.Example;
 
 /**
@@ -32,7 +30,6 @@ import tk.mybatis.mapper.entity.Example;
  */
 @Controller
 @RequestMapping("group")
-@Api("群组模块")
 public class GroupController extends BaseController<GroupBiz, Group> {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
