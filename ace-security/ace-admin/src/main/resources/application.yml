@@ -53,13 +53,13 @@ auth:
 #redis-cache 相关
 redis: 
   pool: 
-    min-idle: 5
-    max-idle: 20
-    max-active: 100
+    minIdle: 5
+    maxIdle: 20
+    maxActive: 100
+    maxWait: 5000
   host: 192.168.20.208
   port: 6379
   password:
   timeout: 2000
   sysName: ace-admin
-  enable: true
   database: 0
