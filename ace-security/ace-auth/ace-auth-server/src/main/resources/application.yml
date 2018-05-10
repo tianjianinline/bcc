@@ -7,9 +7,14 @@ spring:
     default-property-inclusion: NON_NULL
   redis:
     database: 1
-    host: 192.168.20.208
+    host: 127.0.0.1
+    port: 6379
     pool:
-      max-active: 20
+      minIdle: 5
+      maxIdle: 20
+      maxActive: 100
+      maxWait: 5000
+    timeout: 2000
 
 server:
   port: 9777 #启动端口

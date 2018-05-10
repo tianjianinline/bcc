@@ -10,7 +10,8 @@ spring:
     default-property-inclusion: NON_NULL
   redis:
     database: 1
-    host: 192.168.20.208
+    host: 127.0.0.1
+    port: 6379
     pool:
       minIdle: 5
       maxIdle: 20
@@ -31,8 +32,7 @@ zuul:
     default-policy: #optional - will apply unless specific policy exists
       limit: 200
       refresh-interval: 60 #default value (in seconds)
-      type: #optional
-        - user
+      type: #optional - user
         - origin
         - url
   routes:
