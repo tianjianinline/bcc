@@ -12,6 +12,8 @@ spring:
     database: 1
     host: 192.168.20.208
     pool:
+      min-idle: 5
+      max-idle: 20
       max-active: 100
 server:
   port: 8765 #启动端口

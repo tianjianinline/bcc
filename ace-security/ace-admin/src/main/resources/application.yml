@@ -52,10 +52,10 @@ auth:
 
 #redis-cache 相关
 redis: 
-  pool:
-    maxActive: 100
-    maxIdle: 20
-    maxWait: 1000
+  pool: 
+    min-idle: 5
+    max-idle: 20
+    max-active: 100
   host: 192.168.20.208
   port: 6379
   password:
