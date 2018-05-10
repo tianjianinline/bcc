@@ -2,7 +2,7 @@ package com.bcc.security.gate.config;
 
 import com.bcc.gate.ratelimit.config.IUserPrincipal;
 import com.bcc.security.auth.client.config.UserAuthConfig;
-import com.bcc.security.auth.client.jwt.UserAuthUtil;
+import com.bcc.security.auth.client.jwt.UserAuthClient;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class UserPrincipal implements IUserPrincipal {
     @Autowired
     private UserAuthConfig userAuthConfig;
     @Autowired
-    private UserAuthUtil userAuthUtil;
+    private UserAuthClient userAuthUtil;
 
     @Override
     public String getName(HttpServletRequest request) {

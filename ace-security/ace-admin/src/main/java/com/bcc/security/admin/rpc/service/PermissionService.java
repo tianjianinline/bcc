@@ -11,7 +11,7 @@ import com.bcc.security.admin.vo.FrontUser;
 import com.bcc.security.admin.vo.MenuTree;
 import com.bcc.security.api.vo.authority.PermissionInfo;
 import com.bcc.security.api.vo.user.UserInfo;
-import com.bcc.security.auth.client.jwt.UserAuthUtil;
+import com.bcc.security.auth.client.jwt.UserAuthClient;
 import com.bcc.security.common.constant.CommonConstants;
 import com.bcc.security.common.util.TreeUtil;
 
@@ -38,7 +38,8 @@ public class PermissionService {
     @Autowired
     private ElementBiz elementBiz;
     @Autowired
-    private UserAuthUtil userAuthUtil;
+    private UserAuthClient userAuthClient;
+    
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
 
@@ -128,7 +129,7 @@ public class PermissionService {
     }
 
     public FrontUser getUserInfo(String token) throws Exception {
-        String username = userAuthUtil.getInfoFromToken(token).getUniqueName();
+        String username = userAuthClient.getInfoFromToken(token).getUniqueName();
         if (username == null) {
             return null;
         }
@@ -148,7 +149,7 @@ public class PermissionService {
     }
 
     public List<MenuTree> getMenusByUsername(String token) throws Exception {
-        String username = userAuthUtil.getInfoFromToken(token).getUniqueName();
+        String username = userAuthClient.getInfoFromToken(token).getUniqueName();
         if (username == null) {
             return null;
         }

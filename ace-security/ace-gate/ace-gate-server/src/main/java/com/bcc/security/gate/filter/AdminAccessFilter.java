@@ -23,7 +23,7 @@ import com.bcc.security.api.vo.authority.PermissionInfo;
 import com.bcc.security.api.vo.log.LogInfo;
 import com.bcc.security.auth.client.config.UserAuthConfig;
 import com.bcc.security.auth.client.interceptor.ServiceFeignInterceptor;
-import com.bcc.security.auth.client.jwt.UserAuthUtil;
+import com.bcc.security.auth.client.jwt.UserAuthClient;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.common.context.BaseContextHandler;
 import com.bcc.security.common.msg.auth.TokenErrorResponse;
@@ -62,7 +62,7 @@ public class AdminAccessFilter extends ZuulFilter {
     @Value("${zuul.prefix}")
     private String zuulPrefix;
     @Autowired
-    private UserAuthUtil userAuthUtil;
+    private UserAuthClient userAuthUtil;
 
     @Autowired
     private UserAuthConfig userAuthConfig;

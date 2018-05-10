@@ -9,7 +9,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.bcc.security.auth.client.annotation.IgnoreUserToken;
 import com.bcc.security.auth.client.config.UserAuthConfig;
-import com.bcc.security.auth.client.jwt.UserAuthUtil;
+import com.bcc.security.auth.client.jwt.UserAuthClient;
 import com.bcc.security.auth.common.util.jwt.IJWTInfo;
 import com.bcc.security.common.context.BaseContextHandler;
 
@@ -19,7 +19,7 @@ import com.bcc.security.common.context.BaseContextHandler;
 public class UserAuthRestInterceptor extends HandlerInterceptorAdapter {
 
     @Autowired
-    private UserAuthUtil userAuthUtil;
+    private UserAuthClient userAuthUtil;
 
     @Autowired
     private UserAuthConfig userAuthConfig;

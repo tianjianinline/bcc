@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureException;
  * Created by ace on 2017/9/15.
  */
 @Configuration
-public class UserAuthUtil {
+public class UserAuthClient {
 	@Autowired
 	private ServiceAuthFeign serviceAuthFeign;
 
